@@ -25,8 +25,7 @@ export interface StoreContextValue {
   createNewBlog: (data: BlogData) => Promise<Post>; 
 }
 
-
-const DEFAULT_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+const DEFAULT_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 export const StoreContext = createContext<StoreContextValue>({
   url: DEFAULT_URL,

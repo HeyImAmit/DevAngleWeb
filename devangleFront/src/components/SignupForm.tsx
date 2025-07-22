@@ -17,6 +17,7 @@ export function SignupForm({
   const [name, setName] = useState("");
   const { signup } = useAuth();
   const navigate = useNavigate();
+  const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -93,8 +94,7 @@ export function SignupForm({
                   type="button"
                   className="w-full"
                   onClick={() => {
-                    window.location.href =
-                      "http://localhost:8080/oauth2/authorization/google";
+                    window.location.href = `${BASE_URL}/oauth2/authorization/google`;
                   }}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

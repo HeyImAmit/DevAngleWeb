@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [statsLoading, setStatsLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -46,7 +47,7 @@ export default function Dashboard() {
         const token = localStorage.getItem("token");
         console.log("Fetching posts with token:", token ? "present" : "missing");
         
-        const res = await fetch("http://localhost:8080/api/posts", {
+        const res = await fetch(`${BASE_URL}/api/posts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         

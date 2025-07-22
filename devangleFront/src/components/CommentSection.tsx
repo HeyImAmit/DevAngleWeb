@@ -35,6 +35,8 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const [newComment, setNewComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
+
   useEffect(() => {
     fetchComments();
   }, [postId]);
@@ -43,7 +45,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/posts/${postId}/comments`, {
+      const response = await fetch(`${BASE_URL}/api/posts/${postId}/comments`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -66,7 +68,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
     try {
       setSubmitting(true);
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/posts/${postId}/comments`, {
+      const response = await fetch(`${BASE_URL}/api/posts/${postId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +92,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
   const handleLikeComment = async (commentId: number) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/comments/${commentId}/like`, {
+      const response = await fetch(`${BASE_URL}/api/comments/${commentId}/like`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

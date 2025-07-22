@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = "http://localhost:8080/api/auth";
+  const API_BASE = `${import.meta.env.VITE_BACKEND_URL}/api/auth`;
 
   const setUserWithLog = (user: AuthUser | null) => {
     if (user === null) {

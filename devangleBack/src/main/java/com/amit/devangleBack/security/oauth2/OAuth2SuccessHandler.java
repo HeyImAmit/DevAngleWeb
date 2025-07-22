@@ -3,6 +3,7 @@ package com.amit.devangleBack.security.oauth2;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -20,6 +21,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
+
+    @Value("${frontend.url}")
+    private String frontendURL;
 
     public OAuth2SuccessHandler(UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
@@ -54,7 +58,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String token = jwtTokenProvider.generateToken(user.getEmail());
 
         // Redirect to your frontend, passing token as query param
-        String frontendUrl = "http://localhost:5173/auth/callback?token=" + token;
+        String frontendUrl = frontendURL + "/auth/callback?token=" + token;
         response.sendRedirect(frontendUrl);
     }
 }

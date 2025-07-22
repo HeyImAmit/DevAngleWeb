@@ -38,6 +38,7 @@ export default function PostDetail() {
   const [error, setError] = useState<string | null>(null);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
   useEffect(() => {
     if (!id) return;
@@ -48,7 +49,7 @@ export default function PostDetail() {
         const token = localStorage.getItem("token");
         console.log("Fetching post with token:", token ? "present" : "missing");
         
-        const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/posts/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -83,7 +84,7 @@ export default function PostDetail() {
     
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/api/posts/${post.id}/like`, {
+      const response = await fetch(`${BASE_URL}/api/posts/${post.id}/like`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -93,7 +94,7 @@ export default function PostDetail() {
       if (response.ok) {
         toast.success(isLiked ? "Like removed" : "Post liked!");
         // Refetch post to get updated like state
-        const updated = await fetch(`http://localhost:8080/api/posts/${post.id}`, {
+        const updated = await fetch(`${BASE_URL}/api/posts/${post.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (updated.ok) {
@@ -284,7 +285,7 @@ export default function PostDetail() {
                 onClick={async () => {
                   if (window.confirm("Are you sure you want to delete this post?")) {
                     const token = localStorage.getItem("token");
-                    const res = await fetch(`http://localhost:8080/api/posts/${post.id}`, {
+                    const res = await fetch(`${BASE_URL}/api/posts/${post.id}`, {
                       method: "DELETE",
                       headers: { Authorization: `Bearer ${token}` },
                     });

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { StoreContext } from "./StoreContext";
 
-const DEFAULT_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+const DEFAULT_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

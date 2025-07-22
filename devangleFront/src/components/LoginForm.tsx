@@ -16,6 +16,7 @@ export function LoginForm({
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -91,7 +92,7 @@ export function LoginForm({
                   className="w-full"
                   onClick={() => {
                     window.location.href =
-                      "http://localhost:8080/oauth2/authorization/google";
+                      `${BASE_URL}/oauth2/authorization/google`;
                   }}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

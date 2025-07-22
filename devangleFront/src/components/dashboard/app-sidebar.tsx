@@ -160,7 +160,7 @@ const data = {
 function getAvatarUrl(avatar?: string | null): string {
   if (!avatar) return "/avatar.jpg";
   if (/^https?:\/\//.test(avatar)) return avatar;
-  return `http://localhost:8080${avatar.startsWith("/") ? "" : "/"}${avatar}`;
+  return `${import.meta.env.VITE_BACKEND_URL}${avatar.startsWith("/") ? "" : "/"}${avatar}`;
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

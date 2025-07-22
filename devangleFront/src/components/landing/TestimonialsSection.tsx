@@ -35,7 +35,6 @@ export function TestimonialsSection() {
   ];
 
   const [index, setIndex] = useState(0);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <section className="w-full py-20 bg-gray-900 dark:bg-gray-950">
